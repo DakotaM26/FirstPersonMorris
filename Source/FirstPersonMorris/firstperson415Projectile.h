@@ -6,27 +6,34 @@
 #include "GameFramework/Actor.h"
 #include "firstperson415Projectile.generated.h"
 
-UCLASS()
+class USphereComponent;
+class UProjectileMovementComponent;
+class UNiagaraSystem;
+
+UCLASS(config=Game)
+
 class FIRSTPERSONMORRIS_API Afirstperson415Projectile : public AActor
 {
 	GENERATED_BODY()
-	// Set and identify the ball mesh.
+
+	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
+	USphereComponent* CollisionComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	UProjectileMovementComponent* ProjectileMovement;
 	
 	UPROPERTY(EditAnywhere)
 	    UStaticMeshComponent* ballMesh;
 
-	// Sets and identify the base material.
 	UPROPERTY(EditAnywhere)
-	    UMaterial* baseMAT;
-	// Set ups random color.
-     UPROPERTY()
-	     FLinearColor randColor;
-     // Set up projectile material.
-	 UPROPERTY(EditAnywhere)
-	     UMaterialInterface* projMat;
-	// DMI Material
-	 UPROPERTY()
-	     UMaterialInstanceDynamic* dmiMat;
+	    UMaterial* baseMat;
+
+	UPROPERTY()
+	    FLinearColor randColor;
+	
+		//Niagara System is identfy with colorP
+	UPROPERTY(EditAnywhere)
+	    UNiagaraSystem* colorP;
 
 public:	
 	// Sets default values for this actor's properties
@@ -34,7 +41,7 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay();
+	virtual void BeginPlay() override;
 
 public:	
 	// Called every frame
