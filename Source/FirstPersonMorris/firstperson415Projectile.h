@@ -15,23 +15,23 @@ UCLASS(config=Game)
 class FIRSTPERSONMORRIS_API Afirstperson415Projectile : public AActor
 {
 	GENERATED_BODY()
-
+	// Sets Collision Component
 	UPROPERTY(VisibleDefaultsOnly, Category=Projectile)
 	USphereComponent* CollisionComp;
-
+	// Sets Projectile Movement Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
-	
+	// Sets ball as a mesh
 	UPROPERTY(EditAnywhere)
 	    UStaticMeshComponent* ballMesh;
-
+	// Sets Base Material
 	UPROPERTY(EditAnywhere)
 	    UMaterial* baseMat;
-
+	// Sets the random color and linear color
 	UPROPERTY()
 	    FLinearColor randColor;
 	
-		//Niagara System is identfy with colorP
+	//Sets the Niagara System and colorP
 	UPROPERTY(EditAnywhere)
 	    UNiagaraSystem* colorP;
 

@@ -12,7 +12,7 @@
 
 // Sets default values
 Afirstperson415Projectile::Afirstperson415Projectile()
-{
+{   //Identify the collision component
 	CollisionComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
 	CollisionComp->InitSphereRadius(5.0f);
 	CollisionComp->BodyInstance.SetCollisionProfileName("Projectile");
@@ -20,11 +20,11 @@ Afirstperson415Projectile::Afirstperson415Projectile()
 
 	CollisionComp->SetWalkableSlopeOverride(FWalkableSlopeOverride(WalkableSlope_Unwalkable, 0.f));
 	CollisionComp->CanCharacterStepUpOn = ECB_No;
-
+	// Sets the collision component as a root component
 	RootComponent = CollisionComp;
-
+	// Attach the ball mesh to collision component
 	ballMesh->SetupAttachment(CollisionComp);
-
+	//Identify the projectile movement
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComp"));
 	ProjectileMovement->UpdatedComponent = CollisionComp;
 	ProjectileMovement->InitialSpeed = 3000.f;
@@ -36,7 +36,7 @@ Afirstperson415Projectile::Afirstperson415Projectile()
 }
 
 void Afirstperson415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
-{
+{   // Adds impulse and destroy projectile if we hit with physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherActor != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddForceAtLocation(GetVelocity() * 100.0f, GetActorLocation());
