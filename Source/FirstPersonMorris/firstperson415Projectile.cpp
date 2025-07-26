@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "ProcTerrian.h"
 
 // Sets default values
 Afirstperson415Projectile::Afirstperson415Projectile()
@@ -63,6 +64,12 @@ void Afirstperson415Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Othe
 		MatInstance->SetVectorParameterValue("Color", randColor);
 		MatInstance->SetScalarParameterValue("Frame", frameNum);
 
+		AProcTerrian* procTerrian = Cast<AProcTerrian>(OtherActor);
+
+		if (procTerrian)
+		{
+			procTerrian->AlterMesh(Hit.ImpactPoint);
+		}
 	}
 }
 
