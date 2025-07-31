@@ -84,6 +84,9 @@ protected:
 
 public:
 
+	UPROPERTY(EditAnywhere)
+	    bool IsTelaporting;
+
 	/** Returns the first person mesh **/
 	USkeletalMeshComponent* GetFirstPersonMesh() const { return FirstPersonMesh; }
 
