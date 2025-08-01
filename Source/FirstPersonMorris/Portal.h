@@ -6,7 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Components/SceneCaptureComponent2D.h"
 #include "Engine/TextureRenderTarget2D.h"
-#include "Components/BoxComponent.h
+#include "Components/BoxComponent.h"
+#include "Components/ArrowComponent.h"
 #include "Portal.generated.h"
 
 class FirstPersonMorrisCharacter;
@@ -32,6 +33,10 @@ public:
 	// Set Scene Capture Component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	    USceneCaptureComponent2D* sceneCapture;
+
+	UPROPERTY(EditAnywhere)
+	    UArrowComponent* rootArrow;
+
 	// Set Texture Render Target
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	    UTextureRenderTarget2D* renderTarget;
