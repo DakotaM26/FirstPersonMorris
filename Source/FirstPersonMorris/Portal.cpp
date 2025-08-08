@@ -10,17 +10,17 @@ APortal::APortal()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	mesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
+	baseMesh = CreateDefaultSubobject<UStaticMeshComponent>("Mesh");
 	boxComp = CreateDefaultSubobject<UBoxComponent>("Box Comp");
 	sceneCapture = CreateDefaultSubobject<USceneCaptureComponent2D>("Capture");
 	rootArrow = CreateDefaultSubobject<UArrowComponent>("Root Arrow");
 
     RootComponent = boxComp;
-	mesh->SetupAttachment(boxComp);
-	sceneCapture->SetupAttachment(mesh);
+	baseMesh->SetupAttachment(boxComp);
+	sceneCapture->SetupAttachment(baseMesh);
 	rootArrow->SetupAttachment(RootComponent);
 
-	mesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+	baseMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
 }
 
 // Called when the game starts or when spawned
@@ -28,13 +28,13 @@ void APortal::BeginPlay()
 {
 	Super::BeginPlay();
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &APortal::OnOverlapBegin);
-	mesh->SetHiddenInSceneCapture(true);
+	baseMesh->SetHiddenInSceneCapture(true);
 	//mesh->bCastStaticShadow(false);
 	//mesh->bCastDynamicShadow(false);
 
 	if (mat)
 	{
-		mesh->SetMaterial(0, mat);
+		baseMesh->SetMaterial(0, mat);
 	}
 	
 }
@@ -62,7 +62,7 @@ void APortal::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherA
 			{
 				// If telaporting is false it is set to true so it can overlap
 				playerChar->IsTelaporting = true;
-				FVector loc = OtherPortal->rootArrow->GetComponentLocation;
+				FVector loc = OtherPortal->rootArrow->GetComponentLocation();
 				playerChar->SetActorLocation(loc);
 				//Set time and calls once for 1 second
 				FTimerHandle TimeHandle;

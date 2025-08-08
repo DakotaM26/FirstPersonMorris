@@ -29,7 +29,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	// Set Static Mesh Component
     UPROPERTY(EditAnywhere)
-	    UStaticMeshComponent* mesh;
+	    UStaticMeshComponent* baseMesh;
 	// Set Scene Capture Component
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	    USceneCaptureComponent2D* sceneCapture;
